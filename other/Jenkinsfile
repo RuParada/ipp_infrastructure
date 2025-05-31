@@ -1,0 +1,44 @@
+pipeline {
+  agent any
+  
+  tools {
+    nodejs 'nodejs-20'
+  }
+
+  environment {
+    NODE_OPTIONS = '--max_old_space_size=2048'
+  }
+
+  stages {
+    stage('Clone') {
+      steps {
+        git 'https://github.com/gatsbyjs/gatsby-starter-default.git'
+      } 
+    }
+    stage('Install') {
+      steps {
+        sh 'npm install'
+      } 
+    }
+    stage('Build') {
+      steps {
+        sh 'npm run build'
+      } 
+    }
+    stage('Serve') {
+      steps {
+        // run like a daemon
+        sh 'npm install -g serve'
+        sh 'serve -s public &'
+        echo 'Gatsby site is running.'
+      }
+    }
+    stage('Building image') {
+      steps {
+        script {
+          app = docker.build("my-gatsby-image:${env.BUILD_ID}")
+        }
+      }
+    }
+  }
+}

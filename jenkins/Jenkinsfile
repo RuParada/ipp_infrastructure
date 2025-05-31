@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker build -t ipp-app:latest ./docker'
+            }
+        }
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh './scripts/deploy.sh'
+            }
+        }
+    }
+}

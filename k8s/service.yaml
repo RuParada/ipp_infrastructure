@@ -1,0 +1,11 @@
+apiVersion: networking.k8s.io/v1
+kind: Service
+metadata:
+  name: ipp-service
+spec:
+  selector:
+    app: ipp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 9000

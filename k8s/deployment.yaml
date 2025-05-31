@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ipp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ipp
+  template:
+    metadata:
+      labels:
+        app: ipp
+    spec:
+      containers:
+      - name: ipp
+        image: ipp-app:latest
+        ports:
+        - containerPort: 9000
