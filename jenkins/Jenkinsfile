@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        stage('Pre-install') {
+            steps {
+                dir('ipp') {
+                    sh 'yarn install --frozen-lockfile'
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 checkout([

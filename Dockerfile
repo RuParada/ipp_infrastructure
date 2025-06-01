@@ -4,8 +4,7 @@ RUN yarn global add gatsby-cli
 
 WORKDIR /app
 COPY ./ipp/package.json ./ipp/yarn.lock ./
-RUN yarn install --frozen-lockfile
-
+COPY ./ipp/node_modules ./node_modules
 COPY ./ipp ./
 RUN yarn build
 
