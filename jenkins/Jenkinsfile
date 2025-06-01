@@ -7,7 +7,14 @@ pipeline {
                     $class: 'GitSCM',
                     branches: [[name: '*/main']],
                     doGenerateSubmoduleConfigurations: false,
-                    extensions: [[$class: 'SubmoduleOption', recursiveSubmodules: true]],
+                    extensions: [
+                        [$class: 'SubmoduleOption',
+                            recursiveSubmodules: true,
+                            trackingSubmodules: true,
+                            reference: '',
+                            timeout: 10
+                        ]
+                    ],
                     userRemoteConfigs: [[
                         url: 'https://github.com/RuParada/ipp_infrastructure.git'
                     ]]
@@ -16,7 +23,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker build -t ipp-app:latest .'
+                sh '''
+                    cd ipp
+                    yarn install --frozen-lockfile
+                    cd ..
+                    docker build -t ipp-app:latest .
+                '''
             }
         }
         stage('Deploy to Kubernetes') {
