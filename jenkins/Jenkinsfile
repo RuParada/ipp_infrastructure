@@ -23,12 +23,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh '''
-                    cd ipp
-                    yarn install --frozen-lockfile
-                    cd ..
-                    docker build -t ipp-app:latest .
-                '''
+                sh 'docker build -t ipp-app:latest .'
             }
         }
         stage('Deploy to Kubernetes') {
