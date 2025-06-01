@@ -1,0 +1,3 @@
+[submodule "ipp"]
+	path = ipp
+	url = https://github.com/RuParada/ipp_resume.git

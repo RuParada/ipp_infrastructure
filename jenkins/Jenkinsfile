@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t ipp-app:latest ./docker'
+                sh 'docker build -t ipp-app:latest .'
             }
         }
         stage('Deploy to Kubernetes') {
