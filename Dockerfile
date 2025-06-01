@@ -5,6 +5,8 @@ RUN yarn global add gatsby-cli
 WORKDIR /app
 
 COPY ./ipp ./
+COPY ./ipp/node_modules ./node_modules
+
 RUN yarn build
 
 EXPOSE 9000
