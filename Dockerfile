@@ -1,5 +1,10 @@
-FROM node:18
-RUN apk add --no-cache python3 make g++ bash
+FROM node:18-slim
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    bash \
+    && rm -rf /var/lib/apt/lists/*
 RUN yarn global add gatsby-cli
 
 WORKDIR /app
