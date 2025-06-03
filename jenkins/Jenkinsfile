@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Build Docker image') {
             steps {
-                dir('ipp') {
+                dir('ipp_infrastructure') {
                     sh 'docker build -t ipp-app:latest .'
                 }
             }
